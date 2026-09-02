@@ -77,6 +77,16 @@ const techContainer = document.getElementById("techCompanies");
 techContainer.appendChild(newLi);
 
 //  2.8 How many of the tech companies are labeled blue? Find the result using JavaScript and display the result inside the "blueCompanies" div.
+const blueItems = document.querySelectorAll("#techCompanies .blue");
+
+const blueCompaniesDiv = document.getElementById("blueCompanies");
+
+// const result = document.createElement("p");
+// result.textContent = `Number of Tech companies labeled blue are ${blueItems.length}`;
+// blueCompaniesDiv.appendChild(result);
+
+//or
+blueCompaniesDiv.innerHTML += `<p> Number of Tech companies labeled blue are ${blueItems.length}</p>`
 
 /*
 Question 3:
@@ -89,6 +99,23 @@ background color, another to remove. Then, select the "yesBackground" or
 attach the function you wrote to alter the background color when the respective element
 is clicked on.
 */
+const yesButton = document.getElementById("yes");
+const noButton = document.getElementById("No");
+
+//functions to add and remove background
+const addBackground = ()=>{
+    document.body.style.backgroundColor ="#99ecff";
+
+}
+
+const removeBackground = ()=> {
+    document.body.style.backgroundColor = "";
+}
+
+//binding the click
+yesButton.addEventListener("click", addBackground);
+noButton.addEventListener("click", removeBackground);
+
 
 /*
 Question 4:
@@ -100,3 +127,52 @@ number values and calculate the sum of the two numbers.
 3. If any of the numbers provided is not a number, display a message that says
 "Please enter numerical values only" underneath the form
 */
+//getting the form and the result box using dom
+const form = document.getElementById("adder");
+const resultBox = document.getElementById("sum");
+
+//preventing the browser default behavior 
+form.addEventListener("submit", (event)=>{
+    event.preventDefault(); 
+})
+
+//getting the submit button
+const submitButton = document.getElementById("submitButton");
+
+//adding an event listener to submit button and a function which can be Triggered on click event happens
+submitButton.addEventListener("click" ,()=>
+{
+//getting the input fields
+const firstInput = document.querySelector('input[name="first-value"]');
+const secondInput = document.querySelector('input[name= "second-value');
+
+//reading the inputs 
+const firstValue = firstInput.value;
+const secondValue = secondInput.value;
+
+//casting the input to number
+const number1 = Number(firstValue);
+const number2 = Number(secondValue);
+
+console.log(number1, number2);
+
+//if the Number method returns NaN we will catch it here
+if (isNaN(number1) || isNaN(number2)) {
+  resultBox.textContent = "Please Enter numerical values only";
+  return;
+} 
+
+else {
+//assigning sum and average od the inputs to their respective variables
+  const sum = number1 + number2;
+  const average = sum / 2;
+
+  //seeing the output on the console
+  console.log(sum, average);
+
+  //Displaying the sum and the average on the page(result box)
+  resultBox.textContent = `The sum of the numbers is: ${sum} ,
+    The Average of the number is: ${average}`;
+}
+});
+
