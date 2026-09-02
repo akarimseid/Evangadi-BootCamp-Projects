@@ -2,6 +2,7 @@
 // will be using jQuery this time round.
 
 
+
 // Question 1:
 // The following three questions are based on the two paragraphs under the section which says,
 // "For Question 1".
@@ -71,7 +72,7 @@ firstForm.on("submit", (event)=> {
     const secondValue = $('#in2').val();
 
     const firstInput = Number(firstValue);
-    const secondInput = Number(firstValue);
+    const secondInput = Number(secondValue);
 
     if (isNaN(firstInput) || isNaN(secondInput)){
         $("#dsum").append("<p> Please Enter numerical value only</p>");
@@ -92,3 +93,33 @@ firstForm.on("submit", (event)=> {
 // All the fields should be labeled as required. Once the user submits, write a JavaScript function
 // that checks if all the fields are provided. If not, it should show an error message above the form.
 // If the user provides all the values, hide the form input fields, and display all the values provided by the user on the browser.
+
+const userForm = $("#userForm");
+const errorBox = $(".err");
+const resultBox = $(".result");
+
+userForm.on("submit", (event)=>{
+    event.preventDefault();
+
+    const firstName =$("#forF").val().trim();
+    const lastName =$("#forL").val().trim();
+    const email =$("#email").val().trim();
+    
+    errorBox.text("");
+    resultBox.text("");
+
+    if (!firstName || !lastName || !email){
+        errorBox.text("Please provide all required fields");
+        return;
+    }
+
+    userForm.hide();
+
+    resultBox.html(`
+        <p>First Name: ${firstName}</p>
+        <p>Last Name: ${lastName}</p>
+        <p>Email: ${email}</p>
+        `);
+
+});
+
