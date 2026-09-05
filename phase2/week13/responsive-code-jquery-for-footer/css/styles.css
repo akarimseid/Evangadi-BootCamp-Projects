@@ -338,6 +338,23 @@ body {
 
     /* transform: rotate(0deg);
 			transition: .3s;   */
+
+      .footer-links-wrapper h3 {
+    position: relative;
+    padding: 10px 25px 10px 0;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+  }
+
+  .footer-links-wrapper h3::after {
+    content: "\f067";
+    font-family: "FontAwesome";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+  }
   }
 
   .footer-links-wrapper h3.expanded:after {
