@@ -1,11 +1,12 @@
 
+import { BrowserRouter } from 'react-router'
 import Header from './Components/Header/Header'
 
 function App() {
   return (
-    <>
-    <Header/>
-    </>
+    <BrowserRouter>
+      <Header />
+    </BrowserRouter>
   )
 }
 
