@@ -1,15 +1,31 @@
 import styles from "./Header.module.css";
 import logo from "../../assets/image/logo.png";
 import { Link } from "react-router";
-import {Search, Bell, User, ChevronDown} from "lucide-react"
-import {useState} from "react"
+import { Search, Bell, User, ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 
 function Header() {
-
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  //for blur
+
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const {handleScroll} = ()=> {
+      if (window.scrollY > 50){
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+
+      
+    }
+    window.addEventListener("scroll", handleScroll);
+  }, [])
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isScrolled? styles.scrolled:""}`}>
       <div className={styles.container}>
         {/* logo */}
 
@@ -17,22 +33,22 @@ function Header() {
 
         {/* nav links Link */}
         <nav className={styles.nav}>
-          <Link className={styles.navLink} href="">
+          <Link className={styles.navLink} >
             TV Shows
           </Link>
-          <Link className={styles.navLink} href="">
+          <Link className={styles.navLink} >
             Movies
           </Link>
-          <Link className={styles.navLink} href="">
+          <Link className={styles.navLink} >
             Home
           </Link>
-          <Link className={styles.navLink} href="">
+          <Link className={styles.navLink} >
             New & Popular
           </Link>
-          <Link className={styles.navLink} href="">
+          <Link className={styles.navLink} >
             My List
           </Link>
-          <Link className={styles.navLink} href="">
+          <Link className={styles.navLink} >
             Browse by Language
           </Link>
         </nav>
@@ -81,10 +97,16 @@ function Header() {
 
             {isProfileOpen && (
               <div className={styles.profileMenu}>
-                <link className={styles.profileMenu}> Account</link>
-                <link className={styles.profileMenu}> help center</link>
+                <button type="button" className={styles.profileMenuItem}>
+                  Account
+                </button>
+                <button type="button" className={styles.profileMenuItem}>
+                  Help center
+                </button>
                 <hr className={styles.profileMenuDivider} />
-                <link className={styles.profileMenu}> Sign out</link>
+                <button type="button" className={styles.profileMenuItem}>
+                  Sign out
+                </button>
               </div>
             )}
           </div>
